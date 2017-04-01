@@ -27,4 +27,4 @@ This is the level where the biggest scope of the system is being tested. Since i
 System Testing assumes that most smaller and logic errors have been already detected at lower testing levels, as finding the source of the problem is the hardest at this level, as all parts of the system are running and needs to be checked when a problem is uncovered.
 
 # See Also
- * [SWEBOK Guide](https://www.computer.org/web/swebok), which 
+ * [SWEBOK Guide](https://www.computer.org/web/swebok), information from which has been used in this article.
