@@ -1,4 +1,3 @@
-name: fl9 blog
 title: fl9 blog
 description: My notes, mostly about programming.
 meta_description: "fl9 blog - my notes"
@@ -8,9 +7,9 @@ aboutPage: true
 markdown: kramdown
 highlighter: rouge
 
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
 paginate: 20
-baseurl: '/'
+baseurl: /
 domain_name: 'http://blog.fl9.eu'
 google_analytics: 'UA-XXXXXXXX-X'
 disqus: false
