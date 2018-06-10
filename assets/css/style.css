@@ -297,10 +297,9 @@ hr {
 	background: #eee;
 }
 
-span.code { font-family:Menlo, Monaco, Courier; background-color:#EEE; font-size:14px; }
+code { font-family:'Source Code Pro', Menlo, Monaco, Courier, monospace; background-color:#EEE; }
 
 pre	{
-	font-family:Menlo, Monaco, Courier;
 	white-space:pre-wrap;
 	/*border: 1px solid #ddd;*/
 	padding:20px;
