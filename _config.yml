@@ -10,7 +10,7 @@ highlighter: rouge
 
 gems: [jekyll-paginate]
 paginate: 20
-baseurl: /
+baseurl: '/'
 domain_name: 'http://blog.fl9.eu'
 google_analytics: 'UA-XXXXXXXX-X'
 disqus: false
