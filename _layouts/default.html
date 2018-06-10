@@ -19,6 +19,8 @@
 
   <section id="wrapper" class="{% if page.profile %}home{% endif %}">
     {{ content }}
+    
+    {% include footer.html %}
   </section>
 
   <script src="{{ site.baseurl }}assets/js/jquery-3.3.1.min.js"></script>
