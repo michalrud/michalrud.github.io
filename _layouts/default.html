@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>{{ site.name }}{% if page.title %} - {{ page.title }}{% endif %}</title>
-  <link rel="stylesheet" href="{{ site.baseurl }}assets/css/style.css">
-  <link rel="alternate" type="application/rss+xml" title="My Blog" href="{{ site.baseurl }}feed.xml">
-  <link rel="stylesheet" href="{{ site.baseurl }}assets/css/highlight.css">
+  <link rel="stylesheet" href="{{ 'assets/css/style.css' | relative_url }}">
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href="{{ 'feed.xml' | relative_url }}">
+  <link rel="stylesheet" href="{{ 'assets/css/highlight.css' | relative_url }}">
 </head>
 <body>
   {% include navigation.html %}
@@ -23,9 +23,9 @@
     {% include footer.html %}
   </section>
 
-  <script src="{{ site.baseurl }}assets/js/jquery-3.3.1.min.js"></script>
-  <script src="{{ site.baseurl }}assets/js/main.js"></script>
-  <script src="{{ site.baseurl }}assets/js/highlight.js"></script>
+  <script src="{{ 'assets/js/jquery-3.3.1.min.js' | relative_url }}"></script>
+  <script src="{{ 'assets/js/main.js' | relative_url }}"></script>
+  <script src="{{ 'assets/js/highlight.js' | relative_url }}"></script>
   <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
