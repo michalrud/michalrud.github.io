@@ -39,22 +39,22 @@ Quite obvious idea that comes to mind is to create a simple class that would hol
 
 ```cpp
 class MyData {
-    enum Type {NUM, STR, VEC};
+    enum class Type {NUM, STR, VEC};
 public:
-    MyData(int i_) : i(i_), type(NUM) {}
-    MyData(const std::string& s_) : s(s_), type(STR) {}
+    MyData(int i_) : i(i_), type(Type::NUM) {}
+    MyData(const std::string& s_) : s(s_), type(Type::STR) {}
     MyData(const std::vector<MyData>& v_) :
-        v(v_), type(VEC) {}
-    int& getInt() {assert(NUM == type); return i;};
+        v(v_), type(Type::VEC) {}
+    int& getInt() {assert(Type::NUM == type); return i;};
     std::string& getString()
-        {assert(STR == type); return s;};
+        {assert(Type::STR == type); return s;};
     std::vector<MyData>& getVec()
-        {assert(VEC == type); return v;};
+        {assert(Type::VEC == type); return v;};
 private:
-    Type type;
     int i;
     std::string s;
-    std::vector<MyData> l;
+    std::vector<MyData> v;
+    Type type;
 };
 ```
 
@@ -85,47 +85,48 @@ So, in C++11 if we would want to care about freeing the memory and type safety w
 
 ```cpp
 struct A {
-    enum{NUM, STR, VEC} type;
-    A(int i_) : type(NUM), i(i_) {}
-    A(const std::string& s_) : type(STR) {
+    enum class Type {NUM, STR, VEC};
+    Type type;
+    A(int i_) : type(Type::NUM), i(i_) {}
+    A(const std::string& s_) : type(Type::STR) {
         new((void*)&s) std::string(s_);
     }
-    A(const std::vector<A>& v_) : type(VEC) {
+    A(const std::vector<A>& v_) : type(Type::VEC) {
         new((void*)&v) std::vector<A>(v_);
     }
     A(const A& a) : type(a.type) {
         switch(type) {
-            case NUM:
+            case Type::NUM:
                 i = a.i;
                 break;
-            case STR:
+            case Type::STR:
                 new((void*)&s) std::string(a.s);
                 break;
-            case VEC:
+            case Type::VEC:
                 new((void*)&v) std::vector<A>(a.v);
                 break;
         }
     }
     A& operator=(const A& a) {
         switch(type) {
-            case STR:
+            case Type::STR:
                 s.~basic_string<char>();
                 break;
-            case VEC:
+            case Type::VEC:
                 v.~vector<A>();
                 break;
-            case NUM:
+            case Type::NUM:
                 break;
         }
         type = a.type;
         switch(type) {
-            case NUM:
+            case Type::NUM:
                 i = a.i;
                 break;
-            case STR:
+            case Type::STR:
                 new((void*)&s) std::string(a.s);
                 break;
-            case VEC:
+            case Type::VEC:
                 new((void*)&v) std::vector<A>(a.v);
                 break;
         }
@@ -133,21 +134,21 @@ struct A {
     }
     ~A() {
         switch(type) {
-            case STR:
+            case Type::STR:
                 s.~basic_string<char>();
                 break;
-            case VEC:
+            case Type::VEC:
                 v.~vector<A>();
                 break;
-            case NUM:
+            case Type::NUM:
                 break;
         }
     }
-    int& getInt() {assert(NUM == type); return i;};
+    int& getInt() {assert(Type::NUM == type); return i;};
     std::string& getString()
-        {assert(STR == type); return s;};
+        {assert(Type::STR == type); return s;};
     std::vector<A>& getVec()
-        {assert(VEC == type); return v;};
+        {assert(Type::VEC == type); return v;};
 private:
     union {
         int i;
