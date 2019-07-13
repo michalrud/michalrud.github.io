@@ -1,7 +1,7 @@
 jekyll:
-    image: jekyll/jekyll:pages
-    command: jekyll serve --watch
+    image: starefossen/github-pages
     ports:
-        - 4000:4000
+        - "4000:4000"
     volumes:
-        - .:/srv/jekyll
+        - ./:/usr/src/app
+    tty: true
