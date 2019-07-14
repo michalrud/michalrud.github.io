@@ -63,42 +63,7 @@ Tutaj warto nadmienić dość poważne ograniczenie tego radia - można mieć co
 
 **Uwaga:** Dla ułatwienia gotową listę kontaktów możesz pobrać tutaj: [Lista kontaktów dla Baofeng 1801 w pliku CSV](https://zsyp.fl9.eu/blog/dmr/bao1801contacts.csv) - przygotowaną 13 lipca 2019. Ta lista może się dość szybko zdezaktualizować, więc polecam czytać dalej.
 
-Na początek pobieramy listę wszystkich DMR ID znanych sieci BrandMeister - możemy to zrobić [na tej stronie](https://brandmeister.network/?page=contactsexport). Następnie przetwarzamy pobrane kontakty tym skryptem:
-
-```py
-#!python
-import csv
-
-INPUT_FILENAME="bm_ce.csv"
-OUTPUT_FILENAME="output.csv"
-PRIVATE_CALL="Private Call"
-GROUP_ALL="Group All"
-
-hardcoded = [
-    [0,"TG Poland","260",GROUP_ALL,"On","None"],
-    [0,"TG SP6","2606",GROUP_ALL,"On","None"],
-    [0,"TG DASR","26061",GROUP_ALL,"On","None"],
-    [0,"SP Echo","260097",PRIVATE_CALL,"On","None"],
-    [0,"TG WiresX","260080",GROUP_ALL,"On","None"],
-    [0,"FusionPL","260042",GROUP_ALL,"On","None"],
-    [0,"SP Test","260019",GROUP_ALL,"On","None"]
-]
-
-with open(INPUT_FILENAME, 'rb') as inputfile, open(OUTPUT_FILENAME, 'wb') as outputfile:
-    reader = csv.reader(inputfile, delimiter=',', quotechar='"')
-    writer = csv.writer(outputfile, delimiter=',')
-    first = False
-    counter = 1
-    writer.writerow(["Number", "Name", "Call ID", "Type", "Ring Style", "Call Receive Tone"])
-    for row in hardcoded:
-        row[0] = counter
-        writer.writerow(row)
-        counter += 1
-    for row in reader:
-        if row[0].startswith("260") and int(row[4]) > 20:
-            writer.writerow([counter, row[1], row[0], PRIVATE_CALL, "On", "None"])
-            counter += 1
-```
+Na początek pobieramy listę wszystkich DMR ID znanych sieci BrandMeister - możemy to zrobić [na tej stronie](https://brandmeister.network/?page=contactsexport). Następnie przetwarzamy pobrane kontakty tym skryptem, który [umieściłem na GitHubie](https://gist.github.com/michalrud/bf9d2f2ab9cac3afed18dd3ccfdda712#file-brandmeister_to_1801-py).
 
 Wymaga on pewnego dostrojenia do własnych potrzeb. Oto, co trzeba zmienić:
 
@@ -126,9 +91,26 @@ Czas na zaprogramowanie częstotliwości - tutaj już każdy, kto korzystał wcz
  * **Private Call Confirmed**: Zaznaczone
  * **Data Call Confirmed**: Zaznaczone
 
+#### Import kanałów ze strony przemienniki.net
+
+Na GitHubie z konwerterem kontaktów umieściłem również [skrypt pobierający i konwertujący listę przemienników ze strony przemienniki.net](https://gist.github.com/michalrud/bf9d2f2ab9cac3afed18dd3ccfdda712#file-przemienniki_to_1801-py). Pobiera on wszystkie przemienniki aktualnie działające w Polsce i wrzuca do pliku csv do wrzucenia na radio. Ten skrypt również można dostosować do swoich potrzeb:
+
+ * W linii 22 wartość `HARDCODED` może być dostrojona, by dodać częstotliwości, których nie ma w bazie - np. ulubione częstotliwości directowe.
+ * Wartości `COUNTRY` i `MODE` mogą być zmienione żeby zmienić ustawienia filtrowania częstotliwości.
+
+#### Strefy (zones)
+
+Na początku podczas eksperymentów z radiem zdziwiłem się, że jestem w stanie przełączać tylko pomiędzy pierwszymi 10 zaprogramowanymi kanałami. Okazuje się, że kanały są pogrupowane w *strefy* (ang. Zone), więc nie wszystkie są domyślnie dostępne. Jest to całkiem fajna funkcjonalność pozwalająca na stworzenie do 150 grup, każdej zawierającej do 32 kanałów. Dzięki temu można wygodnie pogrupować sobie kanały na cyfrowe, analogowe, directowe, lokalne, wyjazdowe... Muszę przyznać, że całkiem mi się ta opcja spodobała, choć oczywiście - jak chyba wszystko w tym radiotelefonie - nie jest ona wystarczająco dobrze przybliżona w instrukcji obsługi.
+
+Strefy tworzy i modyfikuje się łatwo - w narzędziu programującym należy w drzewku wejść w `Zone` i kliknąć na jedną ze stref znajdujących się pod spodem. W otwartym okienku można dodawać, usuwać i sortować kanały w strefie, jak również można zmienić nazwę samej grupy.
+
+Następnie w radiu należy wejść w *Menu* -> *Zone* i wybrać strefę dla aktualnego VFO, górnego albo dolnego.
+
 ### 5. Programowanie radia
 
 Tutaj również nie ma niespodzianek. Wystarczy użyć przycisku Write <img style="width: 18px" alt="Ikonka przycisku z tooltipem WRITE" src="https://zsyp.fl9.eu/blog/dmr/write.png" />, a po chwili radio będzie zaprogramowane.
+
+Ja próbując programować za pierwszym razem zawsze otrzymuję komunikat o błędzie połączenia - za drugim razem jednak zawsze działa bezbłędnie.
 
 ## Podsumowanie
 
@@ -137,3 +119,8 @@ To już w sumie wszystko, co musiałem zrobić żeby rozpocząć pracę z DMRem.
  * Mailowy: SP6MR (czyli mój znak wywoławczy) na fl9.eu
  * Mastodon: [@sp6mr@mastodon.radio](https://mastodon.radio/@sp6mr)
  * No i oczywiście przez radio!
+
+## Historia zmian
+
+ * 14 lipca 2019: Dodany skrypt pobierający częstotliwości przemienników i opis stref
+ * 13 lipca 2019: Pierwsza wersja
