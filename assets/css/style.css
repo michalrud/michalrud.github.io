@@ -187,7 +187,9 @@ a,
 }
 
 ul 	{ margin:0; padding:0; }
-li	{ list-style-type:circle; list-style-position:inside; }
+li	{ list-style-type:circle; list-style-position:ouside; }
+ul li ul li {margin: 0 0 0 15pt; list-style-type:disc;}
+ul li ul li ul li {margin: 0 0 0 15pt; list-style-type:square;}
 
 /* Line Height */
 #post-body, p { line-height:1.7; }
