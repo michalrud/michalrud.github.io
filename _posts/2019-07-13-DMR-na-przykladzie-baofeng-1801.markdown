@@ -130,7 +130,7 @@ To już w sumie wszystko, co musiałem zrobić żeby rozpocząć pracę z DMRem.
 
  * 16 lipca 2019:
      - Dokładniejszy opis szczelin czasowych,
-     - Opis Provate Call i adnotacja,
+     - Opis Private Call i adnotacja,
      - Skrypt konwertujący z przemienniki.net dodaje przemienniki DMR z oboma szczelinami czasowymi,
      - Link do listy przemienników na SP-DMR,
      - Opis łączności direktowych
