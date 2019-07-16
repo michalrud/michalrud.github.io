@@ -5,7 +5,7 @@ description: Pierwsze kroki w sieci SP-DMR dla posiadaczy taniego radiotelefonu 
 
 Baofeng 1801 to jeden z najtańszych obecnie radiotelefonów wspierających DMR, więc jest to dobry wybór na rozpoczęcie zabawy z transmisjami cyfrowymi zwłaszcza, jeśli ktoś nie jest do nich przekonany. Poza DMR jest oczywiście możliwość analogowej komunikacji w paśmie 2m i 70cm, więc nawet jeśli łączność cyfrowa nie przypadnie nam do gustu, to urządzenie się nie zmarnuje. Na jego plus przemawia również to, że sprawia wrażenie solidniej wykonanego niż mój poprzedni Baofeng UV-82.
 
-Niestety, na początku DMR może przytłoczyć mnogością opcji. Postaram się ten temat trochę przybliżyć w dalszej części tego artykułu.
+Niestety, na początku DMR może przytłoczyć mnogością opcji. Postaram się ten temat trochę przybliżyć w dalszej części tego artykułu. Zakładam jednak, że czytelnicy są licencjonowanymi radioamatorami lub są zaznajomieni z podstawową radioamatorską nomenklaturą.
 
 ## Czym jest DMR?
 
@@ -18,23 +18,21 @@ Można się kłócić, że równie dobrze można użyć zwykłego telefonu, a ta
 ## Mały słowniczek
 
 Osoby zaczynające poznawać DMR od razu zauważą mnogość nowych terminów, które nie zawsze są dobrze wytłumaczone. Zacznijmy więc od małego słowniczka:
-
-**DMR ID** - DMRowy odpowiednik numeru telefonu, indywidualny dla każdego radioamatora. DMR ID dla Polski zaczynają się od cyfr `260`, po którym następuje numer okręgu - w moim przypadku moim DMR ID jest `2606134`. DMR ID można uzyskać [rejestrując się na odpowiedniej stronie](https://register.ham-digital.org/), można je również [przeszukiwać na tej stronie](https://ham-digital.org/dmr-userreg.php) oraz pobrać [całą bazę DMR ID](https://ham-digital.org/status/).
-
-**Talk Group** - po polsku *grupy rozmowne*. Numery DMR ID, z którymi można wykonywać łączności grupowe. Polecam zapoznać się z [artykułem na SP-DMR](http://www.sp-dmr.pl/brandmeister/grupy-rozmowne-konfiguracja/) oraz [wiki BrandMeistera](https://wiki.brandmeister.network/index.php/Poland), gdzie opisane są polskie grupy rozmowne.
-
-**BrandMeister** - Sieć DMR, do której również należy polska sieć SP-DMR. Łączy ze sobą przemienniki, hotspoty itp. [Strona sieci](https://brandmeister.network/), [Podgląd aktualnie prowadzonych łączności](https://hose.brandmeister.network/).
-
-**Hotspot** - mały przemiennik do osobistego użytku, o niewielkiej mocy. Przydatne do testów (nie zajmuje się "dużego" przemiennika) oraz do ułatwienia łączności jeśli jesteśmy poza zasięgiem przemienników. Wymaga łączności z internetem aby uzyskać dostęp do sieci DMR i móc porozumiewać się z innymi hotspotami i przemiennikami.
-
-**Code Plug** - Konfiguracja radia zrzucona do pliku. Często udostępniana dla ułatwienia wstępnej konfiguracji, ale nie jest potrzebna do rozpoczęcia pracy.
-
-**Color Code**, **CC** - Funkcjonalność w praktyce trochę podobna do kodów CTCSS - radiotelefony potrafią porozumiewać się tylko z innymi stacjami, które mają ustawioną taką samą wartość CC. Dzięki temu różne sieci korzystające z tej samej częstotliwości mogą sobie nawzajem nie przeszkadzać - choć oczywiście jeśli dwie stacje z różnymi CC będą chciały jednocześnie korzystać z tego samego pasma, to pojawią się problemy z jakością dźwięku.
-
-**Time Slot**, **TS** - Po polsku *Szczelina Czasowa*. DMR stosuje wielodostęp TDMA, i na każdej częstotliwości mogą odbywać się jednocześnie dwie łączności - na pierwszej i drugiej szczelinie czasowej. Na Wikipedii można znaleźć [artykuł wyjaśniający, czym jest TDMA](https://pl.wikipedia.org/wiki/TDMA).
+ * **DMR ID** - DMRowy odpowiednik numeru telefonu, indywidualny dla każdego radioamatora. DMR ID dla Polski zaczynają się od cyfr `260`, po którym następuje numer okręgu - w moim przypadku moim DMR ID jest `2606134`. DMR ID można uzyskać [rejestrując się na odpowiedniej stronie](https://register.ham-digital.org/), można je również [przeszukiwać na tej stronie](https://ham-digital.org/dmr-userreg.php) oraz pobrać [całą bazę DMR ID](https://ham-digital.org/status/).
+ * **Talk Group** - po polsku *grupy rozmowne*. Numery DMR ID, z którymi można wykonywać łączności grupowe. Polecam zapoznać się z [artykułem na SP-DMR](http://www.sp-dmr.pl/brandmeister/grupy-rozmowne-konfiguracja/) oraz [wiki BrandMeistera](https://wiki.brandmeister.network/index.php/Poland), gdzie opisane są polskie grupy rozmowne.
+ * **Private Call** - łączności 1-1. Niezalecane na przemiennikach, bo inni użytkownicy nie słyszą takich łączności - co oczywiście nie oznacza, że usłyszenie ich jest niemożliwe. Łączności takie zajmują przemiennik uniemożliwiając innym włączenie się do rozmowy, co jest generalnie nieeleganckie.
+     - Private Call jest wykorzystywany również do wykonywania poleceń na przemienniku, jak łączenie z reflektorami. Kwestii reflektorów nie będę poruszał w tym artykule.
+ * **BrandMeister** - Sieć DMR, do której również należy polska sieć SP-DMR. Łączy ze sobą przemienniki, hotspoty itp. [Strona sieci](https://brandmeister.network/), [Podgląd aktualnie prowadzonych łączności](https://hose.brandmeister.network/).
+ * **Hotspot** - mały przemiennik do osobistego użytku, o niewielkiej mocy. Przydatne do testów (nie zajmuje się "dużego" przemiennika) oraz do ułatwienia łączności jeśli jesteśmy poza zasięgiem przemienników. Wymaga łączności z internetem aby uzyskać dostęp do sieci DMR i móc porozumiewać się z innymi hotspotami i przemiennikami.
+ * **Code Plug** - Konfiguracja radia zrzucona do pliku. Często udostępniana dla ułatwienia wstępnej konfiguracji, ale nie jest potrzebna do rozpoczęcia pracy.
+ * **Color Code**, **CC** - Funkcjonalność w praktyce trochę podobna do kodów CTCSS - radiotelefony potrafią porozumiewać się tylko z innymi stacjami, które mają ustawioną taką samą wartość CC. Dzięki temu różne sieci korzystające z tej samej częstotliwości mogą sobie nawzajem nie przeszkadzać - choć oczywiście jeśli dwie stacje z różnymi CC będą chciały jednocześnie korzystać z tego samego pasma, to pojawią się problemy z jakością dźwięku.
+ * **Time Slot**, **TS** - Po polsku *Szczelina Czasowa*. DMR stosuje wielodostęp TDMA, i na każdej częstotliwości mogą odbywać się jednocześnie dwie łączności - na pierwszej i drugiej szczelinie czasowej. Na Wikipedii można znaleźć [artykuł wyjaśniający, czym jest TDMA](https://pl.wikipedia.org/wiki/TDMA).
+     - Który TS wybrać? *To zależy.*
+         + W przypadku łączności z hotspotem najprawdopodobniej zawsze będziemy korzystali z jednego TS. W przypadku mojego hotspota jest to TS2, ale w każdym może być inaczej.
+         + W przypadku łączności przez przemiennik należy wybrać 1 lub 2 TS. Zgodnie z [opisem na stronie SP-DMR](http://www.sp-dmr.pl/brandmeister/grupy-rozmowne-konfiguracja/), do łączności w sieci należy używać slotu pierwszego, a do łączności w obrębie przemiennika - slotu drugiego.
+         + Do łączności bezpośrednich (simpleks) preferowany jest TS2.
 
 ## Programowanie Baofeng 1801
-
 Potrzebne będzie [narzędzie do programowania tego radiotelefonu](https://nc.fl9.eu/index.php/s/eiHitRmBLjtHdfE). Niestety, działa ono tylko pod Windowsem - na Linuksie Wine, którego użyłem nie było w stanie uruchomić tego cudu techniki. Windows pod VirtualBoksem działa wyśmienicie, pod warunkiem przekierowania portów USB - [instrukcję można znaleźć na StackOverflow](https://askubuntu.com/questions/25596/how-to-set-up-usb-for-virtualbox/25600#25600).
 
 Mogą też być potrzebne sterowniki do kabla. Należy je zdobyć we własnym zakresie w zależności od posiadanego przewodu.
@@ -87,7 +85,7 @@ Czas na zaprogramowanie częstotliwości - tutaj już każdy, kto korzystał wcz
  * **Color Code**: 1 (dla innych przemienników wartość może być inna)
  * **Emergency System**: None
  * **Contact**: Domyślny kontakt na kanale, np. ulubiona grupa rozmowna
- * **Repeater Slot**: Szczelina czasowa.
+ * **Repeater Slot**: Szczelina czasowa
  * **Private Call Confirmed**: Zaznaczone
  * **Data Call Confirmed**: Zaznaczone
 
@@ -96,7 +94,11 @@ Czas na zaprogramowanie częstotliwości - tutaj już każdy, kto korzystał wcz
 Na GitHubie z konwerterem kontaktów umieściłem również [skrypt pobierający i konwertujący listę przemienników ze strony przemienniki.net](https://gist.github.com/michalrud/bf9d2f2ab9cac3afed18dd3ccfdda712#file-przemienniki_to_1801-py). Pobiera on wszystkie przemienniki aktualnie działające w Polsce i wrzuca do pliku csv do wrzucenia na radio. Ten skrypt również można dostosować do swoich potrzeb:
 
  * W linii 22 wartość `HARDCODED` może być dostrojona, by dodać częstotliwości, których nie ma w bazie - np. ulubione częstotliwości directowe.
- * Wartości `COUNTRY` i `MODE` mogą być zmienione żeby zmienić ustawienia filtrowania częstotliwości.
+ * Wartości `COUNTRY` i `MODE` mogą być zmienione żeby dopasować ustawienia filtrowania częstotliwości.
+
+Skrypt sprawdza rodzaj przemiennika, i jeśli przemiennik zdaje się wspierać DMR - jego tryb zostanie ustawiony na cyfrowy, a on sam zostanie dodany w dwóch kopiach - z ustawionymi obiema szczelinami czasowymi (TS1 i TS2), żeby nie trzeba było grzebać w menu i przełączać.
+
+**Uwaga:** Wygląda na to, że na przemienniki.net nie ma wymienionych wszystkich przemienników DMRowych. Pełną listę można znaleźć na [liście przemienników na stronie SP-DMR](http://www.sp-dmr.pl/przemienniki-sp-dmr/).
 
 #### Strefy (zones)
 
@@ -112,6 +114,10 @@ Tutaj również nie ma niespodzianek. Wystarczy użyć przycisku Write <img styl
 
 Ja próbując programować za pierwszym razem zawsze otrzymuję komunikat o błędzie połączenia - za drugim razem jednak zawsze działa bezbłędnie.
 
+## Łączności bezpośrednie / direct
+
+Łączności simpleksowe w DMR robi się niewiele trudniej niż łączności analogowe - wystarczy na obu radiotelefonach ustawić tę samą częstotliwość i upewnić się, że Color Code jest ustawiony na taką samą wartość. Ze względu na to, że w DMR trzeba mieć ustawionego adresata łączności, trzeba wybrać grupę rozmowną w której rozmawiamy - **w simpleksie zaleca się korzystanie z grupy 9**. Preferowane jest również **używanie TS2**.
+
 ## Podsumowanie
 
 To już w sumie wszystko, co musiałem zrobić żeby rozpocząć pracę z DMRem. Jako, że są to moje pierwsze kroki w tej sieci, chętnie dowiem się, o czym zapomniałem i czego nie zrobiłem - jeśli masz uwagi, proszę o kontakt, a zaktualizuję artykuł:
@@ -122,5 +128,11 @@ To już w sumie wszystko, co musiałem zrobić żeby rozpocząć pracę z DMRem.
 
 ## Historia zmian
 
+ * 16 lipca 2019:
+     - Dokładniejszy opis szczelin czasowych,
+     - Opis Provate Call i adnotacja,
+     - Skrypt konwertujący z przemienniki.net dodaje przemienniki DMR z oboma szczelinami czasowymi,
+     - Link do listy przemienników na SP-DMR,
+     - Opis łączności direktowych
  * 14 lipca 2019: Dodany skrypt pobierający częstotliwości przemienników i opis stref
  * 13 lipca 2019: Pierwsza wersja
